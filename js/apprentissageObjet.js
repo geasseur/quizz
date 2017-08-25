@@ -1,10 +1,12 @@
 var tabReponses = ["vide", "vide", "vide", "vide"];
 var choixReponse;
+var positionReponse;
+var reponseAleatoire;
 var signeQuestion;
 var signe;
 var colonneSigne; //colonne des signe japonais, sert à la comparaison
 var colonneLettre; //colonne des lettres, sert à la comparaison
-var listeReponse = document.getElementsByClassName("signe");
+var listeReponse = document.getElementsByClassName("reponseSigne");
 var avance = 0;
 
 function chargementTableau(){
@@ -36,7 +38,8 @@ function selection(signe){
     choixReponse = signe.japon[avance]["latin"];
     console.log(choixReponse);
     var nouveauRangement = new rangementSigne(signeQuestion);
-    nouveauRangement.dispositionLettre(choixReponse);
+    nouveauRangement.dispositionLettre();
+    nouveauRangement.dispositionBonneReponse(choixReponse);
   }
   console.log(choixReponse);
   console.log(signeQuestion);
@@ -52,30 +55,46 @@ function rangementSigne(signeQuestion, choixReponse){
     console.log(signeQuestion);
     $("#imgQuestion").attr('src', signeQuestion);
   }
-  this.dispositionLettre = function(choixReponse){
-    var positionReponse = Math.floor(Math.random()*(5 - 1));
-    console.log(positionReponse);
-    tabReponses[positionReponse] = choixReponse;
-    console.log(tabReponses);
-    console.log(signe);
-    for (var i = 0; i < 3; i++) {
-      positionReponse = Math.floor(Math.random()*(4 - 1));
-      var reponseAleatoire = Math.floor(Math.random()*(tabReponses.length-1)+1);
-      if (tabReponses[positionReponse] == "vide" ) {
-        tabReponses[positionReponse] = signe.japon[reponseAleatoire]["latin"];
-      }
-      else if (tabReponses[positionReponse] == choixReponse){
-        return;
+  this.dispositionLettre = function(){
+    for (let i = 0; i < tabReponses.length; i++) {
+      positionFausseReponse = Math.floor(Math.random()*(tabReponses.length));
+      reponseAleatoire = Math.floor(Math.random()*(tabReponses.length));
+      if (tabReponses[positionFausseReponse] == "vide") {
+        tabReponses[positionFausseReponse]=signe.japon[reponseAleatoire]["latin"];
       }
       else{
         i--;
       }
+      console.log(tabReponses);
     }
+  }
+  this.dispositionBonneReponse = function(choixReponse){
+    positionReponse = Math.floor(Math.random()*(5 - 1));
+    console.log(positionReponse);
+    tabReponses[positionReponse] = choixReponse;
     console.log(tabReponses);
+    for (var i = 0; i < tabReponses.length; i++) {
+      listeReponse[i].append(tabReponses[i]);
+    }
   }
 }
 
-function comparaison(){
-
+function comparaison(position){
+  console.log(listeReponse[position]);
+  console.log(positionReponse);
+  if (position==positionReponse) {
+    alert("gagné");
+    avance++;
+    for (var i = 0; i < tabReponses.length; i++) {
+      tabReponses[i] = "vide";
+      listeReponse[i].innerHTML="";
+    }
+    var nouvelleSelection = new selection(signe);
+    nouvelleSelection.selectionSigneJap(signe);
+    nouvelleSelection.selectionReponse(signe);
+  }
+  else{
+    alert("perdu");
+  }
 
 }

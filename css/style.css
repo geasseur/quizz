@@ -1,6 +1,4 @@
-*{
-  border: 1px solid #000;
-}
+
 #interface{
     width: 80%;
     margin: auto;
@@ -10,6 +8,14 @@
   width : 30%;
   height: 300px;
   background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reponseSigne{
+  font-size: 220px;
+  color : blue;
 }
 
 #question{
