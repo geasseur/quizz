@@ -1,0 +1,8 @@
+{ "japon" : [
+  { "latin" : "a" , "hiragana" : "img/hiragana/a.jpg"},
+  { "latin" : "i" , "hiragana" : "img/hiragana/i.jpg"},
+  { "latin" : "e" , "hiragana" : "img/hiragana/e.jpeg"},
+  { "latin" : "u" , "hiragana" : "img/hiragana/u.jpg"},
+  { "latin" : "o" , "hiragana" : "img/hiragana/o.jpg"}
+  ]
+}

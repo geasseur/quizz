@@ -1,0 +1,30 @@
+*{
+  border: 1px solid #000;
+}
+#interface{
+    width: 80%;
+    margin: auto;
+    background-color: grey;
+}
+.signe{
+  width : 30%;
+  height: 300px;
+  background-color: red;
+}
+
+#question{
+  margin: auto;
+  width: 30%;
+  height: 300px;
+}
+#imgQuestion{
+  width: 100%;
+}
+
+#reponse{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
