@@ -4,8 +4,6 @@ var positionReponse;
 var reponseAleatoire;
 var signeQuestion;
 var signe;
-var colonneSigne; //colonne des signe japonais, sert à la comparaison
-var colonneLettre; //colonne des lettres, sert à la comparaison
 var listeReponse = document.getElementsByClassName("reponseSigne");
 var avance = 0;
 
@@ -40,9 +38,8 @@ function selection(signe){
     var nouveauRangement = new rangementSigne(signeQuestion);
     nouveauRangement.dispositionLettre();
     nouveauRangement.dispositionBonneReponse(choixReponse);
+    nouveauRangement.verificationDouble();
   }
-  console.log(choixReponse);
-  console.log(signeQuestion);
   console.log(signe);
 }
 
@@ -57,16 +54,18 @@ function rangementSigne(signeQuestion, choixReponse){
   }
   this.dispositionLettre = function(){
     for (let i = 0; i < tabReponses.length; i++) {
-      positionFausseReponse = Math.floor(Math.random()*(tabReponses.length));
-      reponseAleatoire = Math.floor(Math.random()*(tabReponses.length));
-      if (tabReponses[positionFausseReponse] == "vide") {
-        tabReponses[positionFausseReponse]=signe.japon[reponseAleatoire]["latin"];
+      console.log(signe.japon.length);
+      if (tabReponses[i] == "vide") {
+        reponseAleatoire = Math.floor(Math.random()*(signe.japon.length));
+        console.log(reponseAleatoire);
+        tabReponses[i]=signe.japon[reponseAleatoire]["latin"];
       }
       else{
         i--;
       }
       console.log(tabReponses);
     }
+
   }
   this.dispositionBonneReponse = function(choixReponse){
     positionReponse = Math.floor(Math.random()*(5 - 1));
@@ -77,8 +76,31 @@ function rangementSigne(signeQuestion, choixReponse){
       listeReponse[i].append(tabReponses[i]);
     }
   }
+  this.verificationDouble = function(){
+    console.log("entre verification");
+    console.log(signe.japon.length);
+    for (let i = 0; i < tabReponses.length; i++) {
+      console.log("i = "+i);
+      var test = 0;
+      for (let j = 0; j < signe.japon.length; j++) {
+        console.log("j: "+j);
+        console.log("test = "+test)
+        if (tabReponses[i] == signe.japon[j]["latin"]) {
+          test++;
+          console.log("test= "+test);
+          if (test == 2) {
+            console.log("nouveau!!!!!!!!!!!!!");
+            nouveauRangement.dispositionLettre();
+            nouveauRangement.dispositionBonneReponse(choixReponse);
+          }
+        }
+      }
+    }
+  }
 }
 
+
+//fonction comparant la position de la réponse donné par l'utilisateur avec celle donné à la réponse par le hasard
 function comparaison(position){
   console.log(listeReponse[position]);
   console.log(positionReponse);
