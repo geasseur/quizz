@@ -78,25 +78,26 @@ function rangementSigne(signeQuestion, choixReponse){
   }
   this.verificationDouble = function(){
     console.log("entre verification");
-    console.log(signe.japon.length);
-    for (let i = 0; i < tabReponses.length; i++) {
-      console.log("i = "+i);
-      var test = 0;
-      for (let j = 0; j < signe.japon.length; j++) {
-        console.log("j: "+j);
-        console.log("test = "+test)
-        if (tabReponses[i] == signe.japon[j]["latin"]) {
-          test++;
-          console.log("test= "+test);
-          if (test == 2) {
-            console.log("nouveau!!!!!!!!!!!!!");
-            nouveauRangement.dispositionLettre();
-            nouveauRangement.dispositionBonneReponse(choixReponse);
-          }
-        }
-      }
+    tabReponses.sort();
+    console.log(tabReponses);
+    if (tabReponses[0] == tabReponses[1] || tabReponses[1] == tabReponses[2] || tabReponses[2] == tabReponses[3]){
+      console.log("nouveau!!!!!!!!!!!!!");
+      relance();
     }
   }
+}
+
+//fonction relançant la sélection des réponses en cas de répétition
+function relance(){
+  console.log("relance");
+  for (var i = 0; i < tabReponses.length; i++) {
+    tabReponses[i] = "vide";
+    listeReponse[i].innerHTML="";
+  }
+  var nouveauRangement2 = new rangementSigne(signeQuestion);
+  nouveauRangement2.dispositionLettre();
+  nouveauRangement2.dispositionBonneReponse(choixReponse);
+  nouveauRangement2.verificationDouble();
 }
 
 
