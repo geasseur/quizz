@@ -3,6 +3,16 @@
   { "latin" : "i" , "hiragana" : "img/hiragana/i.jpg"},
   { "latin" : "e" , "hiragana" : "img/hiragana/e.jpeg"},
   { "latin" : "u" , "hiragana" : "img/hiragana/u.jpg"},
-  { "latin" : "o" , "hiragana" : "img/hiragana/o.jpg"}
+  { "latin" : "o" , "hiragana" : "img/hiragana/o.jpg"},
+  { "latin" : "ka" , "hiragana" : "img/hiragana/ka.png"},
+  { "latin" : "ki" , "hiragana" : "img/hiragana/ki.png"},
+  { "latin" : "ku" , "hiragana" : "img/hiragana/ku.jpg"},
+  { "latin" : "ke" , "hiragana" : "img/hiragana/ke.jpg"},
+  { "latin" : "ko" , "hiragana" : "img/hiragana/ko.jpg"},
+  { "latin" : "ga" , "hiragana" : "img/hiragana/ga.jpg"},
+  { "latin" : "gi" , "hiragana" : "img/hiragana/gi.jpg"},
+  { "latin" : "gu" , "hiragana" : "img/hiragana/gu.jpg"},
+  { "latin" : "ge" , "hiragana" : "img/hiragana/ge.jpg"},
+  { "latin" : "go" , "hiragana" : "img/hiragana/go.jpeg"}
   ]
 }
