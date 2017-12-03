@@ -26,6 +26,7 @@ function chargementTableau(){
 //objet sélectionnant quel signe proposer a l'utilisateur, prenant aussi la bonne réponse
 function selection(signe){
   this.signe = signe;
+  
   this.selectionSigneJap = function (signe){
     signeQuestion = signe.japon[avance]["hiragana"];
     console.log(signeQuestion);
@@ -35,7 +36,7 @@ function selection(signe){
   this.selectionReponse = function(signe){
     choixReponse = signe.japon[avance]["latin"];
     console.log(choixReponse);
-    var nouveauRangement = new rangementSigne(signeQuestion);
+    var nouveauRangement = new rangementSigne(signeQuestion, choixReponse);
     nouveauRangement.dispositionLettre();
     nouveauRangement.dispositionBonneReponse(choixReponse);
     nouveauRangement.verificationDouble();
@@ -55,14 +56,9 @@ function rangementSigne(signeQuestion, choixReponse){
   this.dispositionLettre = function(){
     for (let i = 0; i < tabReponses.length; i++) {
       console.log(signe.japon.length);
-      if (tabReponses[i] == "vide") {
-        reponseAleatoire = Math.floor(Math.random()*(signe.japon.length));
-        console.log(reponseAleatoire);
-        tabReponses[i]=signe.japon[reponseAleatoire]["latin"];
-      }
-      else{
-        i--;
-      }
+      reponseAleatoire = Math.floor(Math.random()*(signe.japon.length));
+      console.log(reponseAleatoire);
+      tabReponses[i]=signe.japon[reponseAleatoire]["latin"];
       console.log(tabReponses);
     }
 
