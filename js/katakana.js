@@ -13,13 +13,13 @@ function chargementTableau(){
     if (this.readyState == 4 && this.status == 200) {
       signe = JSON.parse(this.responseText);
       console.log(signe);
-      console.log(signe.japon[avance]["hiragana"]);
+      console.log(signe.japon[avance]["katakana"]);
       var nouvelleSelection = new selection(signe);
       nouvelleSelection.selectionSigneJap(signe);
       nouvelleSelection.selectionReponse(signe);
     }
   }
-  xmlhttp.open("GET", "hiragana.json", true);
+  xmlhttp.open("GET", "katakana.json", true);
   xmlhttp.send();
 }
 
@@ -28,7 +28,7 @@ function selection(signe){
   this.signe = signe;
 
   this.selectionSigneJap = function (signe){
-    signeQuestion = signe.japon[avance]["hiragana"];
+    signeQuestion = signe.japon[avance]["katakana"];
     console.log(signeQuestion);
     var nouveauRangement = new rangementSigne(signeQuestion);
     nouveauRangement.dispositionSigneJap(signeQuestion);
@@ -102,7 +102,6 @@ function comparaison(position){
   console.log(listeReponse[position]);
   console.log(positionReponse);
   if (position==positionReponse) {
-    alert("gagné");
     avance++;
     for (var i = 0; i < tabReponses.length; i++) {
       tabReponses[i] = "vide";
@@ -111,6 +110,9 @@ function comparaison(position){
     var nouvelleSelection = new selection(signe);
     nouvelleSelection.selectionSigneJap(signe);
     nouvelleSelection.selectionReponse(signe);
+  }
+  else if (avance == signe.length) {
+    alert('terminé');
   }
   else{
     alert("perdu");
