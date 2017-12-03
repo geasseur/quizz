@@ -19,14 +19,14 @@ function chargementTableau(){
       nouvelleSelection.selectionReponse(signe);
     }
   }
-  xmlhttp.open("GET", "signe.json", true);
+  xmlhttp.open("GET", "hiragana.json", true);
   xmlhttp.send();
 }
 
 //objet sélectionnant quel signe proposer a l'utilisateur, prenant aussi la bonne réponse
 function selection(signe){
   this.signe = signe;
-  
+
   this.selectionSigneJap = function (signe){
     signeQuestion = signe.japon[avance]["hiragana"];
     console.log(signeQuestion);
