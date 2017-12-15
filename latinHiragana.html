@@ -3,48 +3,52 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Katakana-Latin</title>
+        <title>Latin-Hiragana</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
-
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body onload="chargementTableau()">
+      <div id='fin'>
+        <p id='affichage'></p>
+        <form class="" action="index.html" method="post">
+          <input type="submit" name="" value="retour">
+        </form>
+      </div>
       <header>
-        <h1>Apprentissage Alphabet Japonais</h1>
-        <i>par baptiste ventura</i>
+        <p>progression :</p> <p id='point'></p>
       </header>
-      <section id="interface">
-        <div id="question">
-          <img id="imgQuestion" src="" alt="">
-        </div>
-        <section id="reponse">
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(0)"></h3>
+      <main id='exe' class='container'>
+        <section id="interface">
+          <div class='question col-8'>
+            <p class='col-12 mx-auto' id="question"></p>
           </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(1)"></h3>
-          </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(2)"></h3>
-          </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(3)"></h3>
-          </div>
+          <section id="reponse">
+            <img  src="" alt="" class="imgReponse col-3" onclick="comparaison(0)">
+            <img  src="" alt="" class="imgReponse col-3" onclick="comparaison(1)">
+            <img  src="" alt="" class="imgReponse col-3" onclick="comparaison(2)">
+            <img  src="" alt="" class="imgReponse col-3" onclick="comparaison(3)">
+          </section>
         </section>
-      </section>
+      </main>
+      <footer>
+        <form class="m-3" action="index.html" method="post">
+          <input type="submit" name="" value="retour index">
+        </form>
+      </footer>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="../../jquery-3.2.1.js"></script>
-        <script src="js/katakana.js"> </script>
+        <script src="js/LatinHiragana.js"> </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
