@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Katakana-Latin</title>
+        <title>Latin-katakana</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
-
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="bootstrap4/css/bootstrap.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body onload="chargementTableau()">
@@ -21,22 +21,14 @@
         <i>par baptiste ventura</i>
       </header>
       <section id="interface">
-        <div id="question">
-          <img id="imgQuestion" src="" alt="">
+        <div class='question'>
+          <p id="question"></p>
         </div>
         <section id="reponse">
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(0)"></h3>
-          </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(1)"></h3>
-          </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(2)"></h3>
-          </div>
-          <div class="signe">
-            <h3 class="reponseSigne" onclick="comparaison(3)"></h3>
-          </div>
+          <img src="" alt="" class="imgReponse" onclick="comparaison(0)">
+          <img src="" alt="" class="imgReponse" onclick="comparaison(1)">
+          <img src="" alt="" class="imgReponse" onclick="comparaison(2)">
+          <img src="" alt="" class="imgReponse" onclick="comparaison(3)">
         </section>
       </section>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -44,7 +36,7 @@
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="../../jquery-3.2.1.js"></script>
-        <script src="js/katakana.js"> </script>
+        <script src="js/Latinkatakana.js"> </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

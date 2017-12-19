@@ -4,22 +4,22 @@ var positionReponse;
 var reponseAleatoire;
 var signeQuestion;
 var signe;
-var listeReponse = document.getElementsByClassName("reponseSigne");
-var avance = 0;
-var test = 0;
 var point = 0;
 var total = 0;
+var test = 0;
+var listeReponse = document.getElementsByClassName("imgReponse");
+var avance = 0;
 
 function chargementTableau(){
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       signe = JSON.parse(this.responseText);
+      console.log(signe.length);
       console.log(signe);
       $('#fin').hide();
-      console.log(signe.japon[avance]["hiragana"]);
       var nouvelleSelection = new selection(signe);
-      nouvelleSelection.selectionSigneJap(signe);
+      nouvelleSelection.selectionLatin(signe);
       nouvelleSelection.selectionReponse(signe);
     }
   }
@@ -27,25 +27,26 @@ function chargementTableau(){
   xmlhttp.send();
 }
 
-//objet sélectionnant quel signe proposer a l'utilisateur, prenant aussi la bonne réponse
+//objet sélectionnant quel lettre proposer a l'utilisateur, prenant aussi la bonne réponse
 function selection(signe){
   this.signe = signe;
 
-  this.selectionSigneJap = function (signe){
-    signeQuestion = signe.japon[avance]["hiragana"];
+  //selection lettre latine
+  this.selectionLatin = function (signe){
+    signeQuestion = signe.japon[avance]["latin"];
     console.log(signeQuestion);
     var nouveauRangement = new rangementSigne(signeQuestion);
     nouveauRangement.dispositionSigneJap(signeQuestion);
   }
+  // sélection de sa réponse
   this.selectionReponse = function(signe){
-    choixReponse = signe.japon[avance]["latin"];
+    choixReponse = signe.japon[avance]["hiragana"];
     console.log(choixReponse);
     var nouveauRangement = new rangementSigne(signeQuestion, choixReponse);
-    nouveauRangement.dispositionLettre();
+    nouveauRangement.dispositionLettre(signeQuestion);
     nouveauRangement.dispositionBonneReponse(choixReponse);
     nouveauRangement.verificationDouble();
   }
-  console.log(signe);
 }
 
 //objet rangeant dans l'interface l'image et les réponses proposé à l'utilisateur et 3 réponses aléatoire placé dans un tableau
@@ -53,38 +54,46 @@ function rangementSigne(signeQuestion, choixReponse){
   this.signeQuestion = signeQuestion;
   this.choixReponse = choixReponse;
 
-  this.dispositionSigneJap = function(signeQuestion){
-    console.log(signeQuestion);
-    $("#imgQuestion").attr('src', signeQuestion);
+  //affiche la lettre latine dans l'interface
+  this.dispositionLettre = function(signeQuestion){
+    $("#question").append(signeQuestion);
     $('#point').append(Math.round(total)+'%');
   }
-  this.dispositionLettre = function(){
+  // remplissage aléatoire de tabReponses
+  this.dispositionSigneJap = function(){
     for (let i = 0; i < tabReponses.length; i++) {
-      console.log(signe.japon.length);
       reponseAleatoire = Math.floor(Math.random()*(signe.japon.length));
-      console.log(reponseAleatoire);
-      tabReponses[i]=signe.japon[reponseAleatoire]["latin"];
-      console.log(tabReponses);
+      tabReponses[i]=signe.japon[reponseAleatoire]["hiragana"];
     }
-
+    console.log(tabReponses);
   }
+
+  // bonne réponse rentrée aléatoirement dans le tableau
   this.dispositionBonneReponse = function(choixReponse){
     positionReponse = Math.floor(Math.random()*(5 - 1));
-    console.log(positionReponse);
     tabReponses[positionReponse] = choixReponse;
     console.log(tabReponses);
+
     for (var i = 0; i < tabReponses.length; i++) {
-      listeReponse[i].append(tabReponses[i]);
+      //console.log(listeReponse[1]);
+      $(".imgReponse").eq(i).attr('src',tabReponses[i]);
     }
   }
+
+  // comparaison pour traquer les doublons dans les réponses
   this.verificationDouble = function(){
-    console.log("entre verification");
-    tabReponses.sort();
-    console.log(tabReponses);
-    if (tabReponses[0] == tabReponses[1] || tabReponses[1] == tabReponses[2] || tabReponses[2] == tabReponses[3]){
-      console.log("nouveau!!!!!!!!!!!!!");
-      relance();
-    }
+    //if (test < 10) {
+      //test++;
+      //console.log(test);
+      console.log("entre verification");
+      console.log(avance);
+      //tabReponses.sort();
+      //console.log(tabReponses);
+      if (tabReponses[0] == tabReponses[1] || tabReponses[1] == tabReponses[2] || tabReponses[2] == tabReponses[3] || tabReponses[1] == tabReponses[3] || tabReponses[0] == tabReponses[3] || tabReponses[0] == tabReponses[2]){
+        console.log("nouveau!!!!!!!!!!!!!");
+        relance();
+      }
+    //}
   }
 }
 
@@ -93,10 +102,11 @@ function relance(){
   console.log("relance");
   for (var i = 0; i < tabReponses.length; i++) {
     tabReponses[i] = "vide";
-    listeReponse[i].innerHTML="";
   }
+  $("#question").empty();
   var nouveauRangement2 = new rangementSigne(signeQuestion);
-  nouveauRangement2.dispositionLettre();
+  nouveauRangement2.dispositionLettre(signeQuestion);
+  nouveauRangement2.dispositionSigneJap();
   nouveauRangement2.dispositionBonneReponse(choixReponse);
   nouveauRangement2.verificationDouble();
 }
@@ -104,31 +114,30 @@ function relance(){
 
 //fonction comparant la position de la réponse donné par l'utilisateur avec celle donné à la réponse par le hasard
 function comparaison(position){
-  console.log(listeReponse[position]);
-  console.log(positionReponse);
   if (position==positionReponse) {
     avance++;
     if (test < 1) {
       point++;
       total = (point*100)/46;
       test = 0;
-      $('#point').empty();
       if (avance == signe.length) {
         fin();
       }
     }
-    $('#point').empty();
     test = 0
+    console.log(test);
+    $("#question").empty();
+    $('#point').empty();
     for (var i = 0; i < tabReponses.length; i++) {
       tabReponses[i] = "vide";
-      listeReponse[i].innerHTML="";
     }
     var nouvelleSelection = new selection(signe);
-    nouvelleSelection.selectionSigneJap(signe);
+    nouvelleSelection.selectionLatin(signe);
     nouvelleSelection.selectionReponse(signe);
   }
   else{
     alert("perdu");
+    test++;
   }
 
 }
